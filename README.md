@@ -19,10 +19,20 @@ Add `Bundle 'ToQoz/vim-go-drop-unused-imports'`
 
 ## Configuration
 
-If you want to use custom godrop command that is not :GoDrop nor :Drop.
+If you want to use custom godrop command that is not :Drop nor :GoDrop.
 
 ```
 g:godrop_command = "CustomeGoDrop"
+```
+
+if you don't define `g:godrop_command`, define in this plugin by following rule.
+
+```vim
+if exists(":Drop")
+    let g:godrop_command = "Drop"
+else
+    let g:godrop_command = "GoDrop"
+endif
 ```
 
 ## Usage

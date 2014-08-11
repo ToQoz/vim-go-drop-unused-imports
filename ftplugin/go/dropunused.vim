@@ -3,17 +3,18 @@ if exists("b:did_ftplugin_go_drop_unused")
 endif
 
 if !exists("g:godrop_command")
-    if !exists(":GoDrop")
-        let g:godrop_command = "GoDrop"
-    else
+    if exists(":Drop")
         let g:godrop_command = "Drop"
-    end
+    else
+        let g:godrop_command = "GoDrop"
+    endif
 endif
 
 command! -buffer DropUnused call s:GoDropUnused()
 
 function! s:GoDropUnused()
-    for x in goimps#Unused()
+    let unused = goimps#Unused(expand('%'))
+    for x in unused
         execute g:godrop_command . ' ' . x
     endfor
 
